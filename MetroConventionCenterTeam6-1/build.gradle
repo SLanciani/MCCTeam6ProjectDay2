@@ -20,9 +20,3 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-
-dependencies {
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.3.RELEASE'
-}
