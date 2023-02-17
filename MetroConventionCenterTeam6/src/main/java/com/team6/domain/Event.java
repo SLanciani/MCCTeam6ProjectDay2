@@ -1,14 +1,25 @@
 package com.team6.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="EVENTS")
 public class Event {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
+	@Column(name="EVENT_CODE")
 	String code;
-	
+	@Column(name="TITLE")
 	String title;
-	
+	@Column(name="DESCRIPTION")
 	String description;
 	
 	public Event() {

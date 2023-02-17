@@ -2,18 +2,29 @@ package com.team6.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="REGISTRATIONS")
 public class Registration {
 
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 
+	@Column(name="EVENT_ID")
 	String event_id;
-	
+	@Column(name="CUSTOMER_ID")
 	String customer_id;
-	
+	@Column(name="REGISTRATION_DATE")
 	Date registration_date;
-	
+	@Column(name="NOTES")
 	String notes;
 	
 	public Registration() {
