@@ -58,17 +58,14 @@ public class CustomerAPI {
 	@GetMapping("/byname/{username}")
 	public ResponseEntity<?> lookupCustomerByNameGet(@PathVariable("username") String username,
 			UriComponentsBuilder uri) {
-	
+		
 		ArrayList<Customer> customers = new ArrayList<>();
 		repo.findAll().forEach(customers::add);
 		
-		customers.stream().filter(c -> c.getName().equals(username)).findAny().orElse(null);
-		
-		//URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("byname/{username}").buildAndExpand(customers.forEach(c -> c.getName())).toUri();
-		
-		
-		//ResponseEntity<?> response = ResponseEntity.ok().location(location).build();
-		return null;
+		customers.removeIf(c -> !c.getName().equals(username));
+
+	
+		return ResponseEntity.ok(customers);
 		//  Workshop:  Write an implemenatation to look up a customer by name.  Think about what
 		//  your response should be if no customer matches the name the caller is searching for.
 		//  With the data model implemented in CustomersRepository, do you need to handle more than
