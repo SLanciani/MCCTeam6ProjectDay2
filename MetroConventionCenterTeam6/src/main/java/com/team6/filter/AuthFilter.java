@@ -22,7 +22,7 @@ public class AuthFilter implements Filter{
 
 	//public static Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	private String auth_scope = "com.webage.auth.apis";
-	private String api_scope = "com.webage.data.apis";
+	private String api_scope = "com.team6.data.apis";
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
