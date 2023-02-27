@@ -4,13 +4,12 @@ node {
     }
     
     stage ("Gradle Build - DataService") {
-	cd MetroConvetionCenterTeam6
-        sh 'gradle clean build'
+        sh 'gradle -b MetroConventionCenterTeam6/build.gradle clean build'
 
     }
     
     stage ("Gradle Bootjar-Package - DataService") {
-        sh 'gradle bootjar'
+        sh 'gradle -b MetroConventionCenterTeam6/build.gradle bootjar'
     }
     
     stage('User Acceptance Test - DataService') {
@@ -22,7 +21,7 @@ node {
 	  if(response=="Yes") {
 
 	    stage('Release- DataService') {
-	     sh 'gradle build -x test'
+	     sh 'gradle -b MetroConventionCenterTeam6/build.gradle build -x test'
 	     sh 'echo DataService is ready to release!'
 
 	    }
