@@ -1,6 +1,6 @@
 node {
     stage ("Checkout DataService"){
-        git branch: 'main', url: ' https://github.com/foxwas/bah-mcc-data-day4.git'
+        git branch: 'main', url: ' https://github.com/SLanciani/MCCTeam6ProjectDay2.git'
     }
     
     stage ("Gradle Build - DataService") {
