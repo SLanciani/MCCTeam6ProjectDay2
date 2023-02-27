@@ -58,27 +58,29 @@ public class CustomerAPI {
 	@GetMapping("/byname/{username}")
 	public ResponseEntity<?> lookupCustomerByNameGet(@PathVariable("username") String username,
 			UriComponentsBuilder uri) {
-		
-		ArrayList<Customer> customers = new ArrayList<>();
-		repo.findAll().forEach(customers::add);
-		
-		customers.removeIf(c -> !c.getName().equals(username));
-
-	
-		return ResponseEntity.ok(customers);
-		//  Workshop:  Write an implemenatation to look up a customer by name.  Think about what
-		//  your response should be if no customer matches the name the caller is searching for.
-		//  With the data model implemented in CustomersRepository, do you need to handle more than
-		//  one match per request?
+		Iterator<Customer> customers = repo.findAll().iterator();
+		while(customers.hasNext()) {
+			Customer cust = customers.next();
+			if(cust.getName().equalsIgnoreCase(username)) {
+				ResponseEntity<?> response = ResponseEntity.ok(cust);
+				return response;				
+			}			
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 	
 	//lookupCustomerByName POST
 	@PostMapping("/byname")
 	public ResponseEntity<?> lookupCustomerByNamePost(@RequestBody String username, UriComponentsBuilder uri) {
-		//  Workshop:  Write an implementation to look up a customer by name, using POST semantics
-		//  rather than GET.  You should be able to make use of most of your implmentation for
-		//  lookupCustomerByNameGet().  
-		return null;
+		Iterator<Customer> customers = repo.findAll().iterator();
+		while(customers.hasNext()) {
+			Customer cust = customers.next();
+			if(cust.getName().equals(username)) {
+				ResponseEntity<?> response = ResponseEntity.ok(cust);
+				return response;				
+			}			
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}	
 	
 	
