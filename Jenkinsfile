@@ -4,7 +4,7 @@ node {
     }
     
     stage ("Gradle Build - DataService") {
-	
+	cd MetroConvetionCenterTeam6
         sh 'gradle clean build'
 
     }
