@@ -1,25 +1,17 @@
 package com.team6.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name="CUSTOMERS")
+@Document(collection = "customers")
 public class Customer {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
-	@Column(name = "CUSTOMER_NAME")
 	String name;
-	@Column(name="PASSWORD")
+	
 	String password;
-	@Column(name="EMAIL")
 	String email;
 
 	
