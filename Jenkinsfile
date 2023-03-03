@@ -13,7 +13,7 @@ node {
     }
     
     stage ("Containerize the app-docker build - DataApi") {
-        sh 'docker build -f MetroConventionCenterTeam6 --rm -t mcc-data:v1.0 .'
+        sh 'docker build -f MetroConventionCenterTeam6/Dockerfile --rm -t mcc-data:v1.0 .'
     }
     
     stage ("Inspect the docker image - DataApi"){
