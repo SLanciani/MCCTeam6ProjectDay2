@@ -12,6 +12,19 @@ node {
         sh 'gradle -b MetroConventionCenterTeam6/build.gradle bootjar'
     }
     
+    stage ("Containerize the app-docker build - DataApi") {
+        sh 'docker build --rm -t mcc-data:v1.0 ./MetroConventionCenterTeam6/Dockerfile'
+    }
+    
+    stage ("Inspect the docker image - DataApi"){
+        sh "docker images mcc-data:v1.0"
+        sh "docker inspect mcc-data:v1.0"
+    }
+    
+    stage ("Run Docker container instance - DataApi"){
+        sh "docker run -d --rm --name mcc-data -p 8080:8080 mcc-data:v1.0"
+     }
+    
     stage('User Acceptance Test - DataService') {
 	
 	  def response= input message: 'Is this build good to go?',
