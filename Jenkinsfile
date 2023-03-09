@@ -31,13 +31,28 @@ node {
 	   parameters: [choice(choices: 'Yes\nNo', 
 	   description: '', name: 'Pass')]
 	
-	  if(response=="Yes") {
+	//  if(response=="Yes") {
 
-	    stage('Release- DataService') {
-	     sh 'gradle -b MetroConventionCenterTeam6/build.gradle build -x test'
-	     sh 'echo DataService is ready to release!'
+	//   stage('Release- DataService') {
+	//     sh 'gradle -b MetroConventionCenterTeam6/build.gradle build -x test'
+	//     sh 'echo DataService is ready to release!'
 
+	//    }
+	//  }
+	    
+	    if(response=="Yes") {
+	    stage('Deploy to Kubenetes cluster - DataApi') {
+		  sh "docker stop mcc-data"
+	      sh "kubectl create deployment mcc-data --image=event-mcc-data:v1.0"
+	      sh "kubectl expose deployment mcc-data --type=LoadBalancer --port=8080"
 	    }
-	  }
+	  }	    
+	    
     }
+	stage("Production Deployment View"){
+        sh "kubectl get deployments"
+        sh "kubectl get pods"
+        sh "kubectl get services"
+    }	
+	
 }
